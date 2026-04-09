@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Masis Panel Showcase — Petru Rey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f4f0;
+      --gray: #888;
+      --light-gray: #ddd;
+    }
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      padding: 1.2rem 2.5rem;
+      border-bottom: 1px solid var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      color: var(--black);
+    }
+    .nav-back {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--black);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border: 1px solid var(--black);
+      padding: 0.25rem 0.7rem;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-back:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    /* HERO */
+    .project-hero {
+      border-bottom: 1px solid var(--black);
+      padding: 3rem 2.5rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: end;
+    }
+    .project-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+    }
+    .project-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      padding-bottom: 0.4rem;
+    }
+    .meta-row {
+      display: flex;
+      gap: 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      border-top: 1px solid var(--light-gray);
+      padding-top: 0.6rem;
+    }
+    .meta-label { color: var(--gray); min-width: 80px; }
+    .meta-value { color: var(--black); }
+
+    /* IMAGE AREA */
+    .project-image-full {
+      width: 100%;
+      aspect-ratio: 16/7;
+      background: #e0ddd7;
+      border-bottom: 1px solid var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .project-image-full img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .placeholder-hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      opacity: 0.2;
+    }
+    .placeholder-hero svg { width: 64px; height: 64px; }
+    .placeholder-hero span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* BODY CONTENT */
+    .project-body {
+      display: block;
+    }
+    .project-description {
+      padding: 2.5rem 2.5rem 3rem;
+    }
+    .project-description h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.03em;
+      margin-bottom: 1rem;
+      color: var(--gray);
+    }
+    .project-description p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--black);
+      margin-bottom: 1.2rem;
+    }
+
+
+    /* TECHNICAL BREAKDOWN */
+    .technical-breakdown {
+      border-top: 1px solid var(--black);
+      padding: 3rem 2.5rem 1rem;
+    }
+    .technical-breakdown > h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.03em;
+      color: var(--gray);
+      margin-bottom: 3rem;
+    }
+    .breakdown-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
+      padding-bottom: 4rem;
+    }
+    .breakdown-step {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .breakdown-step:nth-child(even) .step-text { order: 2; }
+    .breakdown-step:nth-child(even) .step-image { order: 1; }
+    .step-text { display: flex; flex-direction: column; gap: 0.8rem; }
+    .step-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.01em;
+      color: var(--black);
+      line-height: 1;
+    }
+    .step-body {
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: var(--black);
+      font-weight: 300;
+    }
+    .step-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #e0ddd7;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .step-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .step-image-placeholder { opacity: 0.15; }
+    .step-image-placeholder svg { width: 40px; height: 40px; }
+    @media (max-width: 768px) {
+      .breakdown-step { grid-template-columns: 1fr; }
+      .breakdown-step:nth-child(even) .step-text { order: unset; }
+      .breakdown-step:nth-child(even) .step-image { order: unset; }
+    }
+
+    /* IMAGE GRID */
+    .project-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--black);
+    }
+    .gallery-item {
+      aspect-ratio: 1;
+      background: #e8e6e0;
+      border-right: 1px solid var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .gallery-item:last-child { border-right: none; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+    .gallery-placeholder { opacity: 0.15; }
+    .gallery-placeholder svg { width: 36px; height: 36px; }
+
+    /* FOOTER */
+    footer {
+      padding: 1.2rem 2.5rem;
+      border-top: 1px solid var(--black);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--gray);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    nav      { animation: fadeUp 0.5s ease both; }
+    .project-hero { animation: fadeUp 0.5s 0.1s ease both; }
+    .project-image-full { animation: fadeUp 0.5s 0.2s ease both; }
+    .project-body { animation: fadeUp 0.5s 0.3s ease both; }
+
+    @media (max-width: 768px) {
+      .project-hero { grid-template-columns: 1fr; }
+      .project-body { grid-template-columns: 1fr; }
+      .project-description { border-right: none; border-bottom: 1px solid var(--black); }
+      .project-gallery { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="portfolio.html" class="nav-name">PETRU REY</a>
+    <a href="portfolio.html" class="nav-back">← Back to work</a>
+  </nav>
+
+  <div class="project-hero">
+    <h1>Masis Panels</h1>
+    <div class="project-meta">
+      <div class="meta-row">
+        <span class="meta-label">Year</span>
+        <span class="meta-value">2026</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Type</span>
+        <span class="meta-value">3D Modelling, Product Showcase</span>
+      </div>
+      <div class="meta-row">
+        <span class="meta-label">Tools</span>
+        <span class="meta-value">Blender</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="project-image-full">
+    <!-- Replace cover-video.mp4 with your video file when ready -->
+    <video
+      src="masis/masis_panouri.mov"
+      autoplay
+      loop
+      muted
+      playsinline
+      style="width:100%;height:100%;object-fit:cover;display:block;"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+    ></video>
+    <div class="placeholder-hero" style="display:none;">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="8" width="48" height="48" rx="3" stroke="black" stroke-width="2"/>
+        <polygon points="26,20 26,44 46,32" stroke="black" stroke-width="2" fill="none" stroke-linejoin="round"/>
+      </svg>
+      <span>Cover video</span>
+    </div>
+  </div>
+
+  <div class="project-body" style="display:block;">
+    <div class="project-description" style="border-right:none;max-width:100%;padding:2.5rem 2.5rem 3rem;">
+      <h2>Overview</h2>
+      <p>I worked with a Bulgarian client to create a 3D "instruction manual" for their DIY campervan panels. This was my first real-world project where I had to learn 3D modeling from scratch while following specific client requirements.</p>
+      <p>The main objective was to show exactly how these panels fit into a van, making the installation process easy for their customers to understand.</p>
+    </div>
+  </div>
+
+  <div class="technical-breakdown">
+    <h2>Technical Breakdown</h2>
+    <div class="breakdown-steps">
+
+      <div class="breakdown-step">
+        <div class="step-text">
+          <h3 class="step-title">Modeling the Panels</h3>
+          <p class="step-body">I started with a few reference photos, adding edges to a mesh plane for all the indentations of the panel. </p>
+          <p class="step-body">To keep the workflow flexible, I used a Subdivision Surface modifier with vertex creases for rounded edges and a Solidify modifier to add thickness. Finally, I used a Simple Deform modifier to give the panels a slight, realistic bend they have in real life. </p>
+        </div>
+        <div class="step-image">
+          <img src="/masis/models.PNG">
+        </div>
+      </div>
+
+      <div class="breakdown-step">
+        <div class="step-text">
+          <h3 class="step-title">Preparing the Van Model</h3>
+          <p class="step-body">I used a high-quality van model as the base, but it needed a few changes to work in the final animation.</p>
+          <p class="step-body">I separated the doors and all their individual parts, then manually reset the origin points to the hinges. This allowed me to animate the doors opening and closing naturally.</p>
+        </div>
+        <div class="step-image">
+          <img src="/masis/van.PNG">
+        </div>
+      </div>
+
+      <div class="breakdown-step">
+        <div class="step-text">
+          <h3 class="step-title">Texturing</h3>
+          <p class="step-body">The client provided a photo of the panel texture, which I initially used to generate a normal map. However, the resolution was a bit too low for the close-up shots I wanted to achieve.</p>
+          <p class="step-body">I also experimented with a noise node but ended up using a serrated plastic texture from Blenderkit. </p>
+        </div>
+        <div class="step-image">
+          <img src="/masis/texture.PNG">
+        </div>
+      </div>
+
+      <div class="breakdown-step">
+              <div class="step-text">
+                <h3 class="step-title">The Animation</h3>
+                <p class="step-body">To show how the panels integrate with the van, I built a custom "fading" effect using transparent and map range nodes in Blender. This allowed the panels to materialize right into the frame, creating a smooth transitions between scenes.</p>
+                <p class="step-body">I then animated the panels snapping into their specific positions and the screws twisting into place.</p>
+              </div>
+              <div class="step-image">
+                <img src="/masis/animation.PNG">
+              </div>
+            </div>
+
+    </div>
+  </div>
+  </div>
+
+  <footer>
+    <span>© 2026 Petru Rey</span>
+    <span>3D Design & Art Direction</span>
+  </footer>
+
+</body>
+</html>
